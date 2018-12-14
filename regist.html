@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en" class="fullscreen-bg">
+
+<head>
+    <title>御世尚品-留言管理后台</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrapValidator.css">
+
+    <!-- VENDOR JS -->
+    <script type="text/javascript" src="assets/vendor/jquery/jquery.js"></script>
+    <script type="text/javascript" src="assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript" src="assets/vendor/bootstrap/js/bootstrapValidator.js"></script>
+
+
+    <link rel="stylesheet" href="assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="assets/vendor/linearicons/style.css">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- FOR DEMO PURPOSES ONLY. You should remove this in your project -->
+    <link rel="stylesheet" href="assets/css/demo.css">
+    <!-- GOOGLE FONTS -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700" rel="stylesheet">
+    <!-- ICONS -->
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/img/logo.ico">
+</head>
+
+<body>
+
+<div class="row">
+    <div class="col-lg-6 col-lg-offset-3 vertical-center">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3>注册用户</h3></div>
+            <div class="panel-body">
+
+
+                <form name="regist" id="regist" method="post" action="regist.php" accept-charset="UTF-8">
+                    <div class="form-group">
+                        <label for="userName">用户名</label>
+                        <input type="text" class="form-control" id="userName" name="userName">
+                    </div>
+                    <div class="form-group">
+                        <label for="userPassword">登录密码</label>
+                        <input type="password" class="form-control" id="userPassword" name="userPassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">重复密码</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword">
+                    </div>
+                    <div class="form-group">
+                        <label for="userEmail">您的邮箱</label>
+                        <input type="text" class="form-control" id="userEmail" name="userEmail">
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="signup" value="Sign up">Sign up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<script>
+    $(document).ready(function () {
+        $('#regist').bootstrapValidator({
+            // live: 'disabled',
+            message: 'This value is not valid',
+            feedbackIcons: {
+                valid: 'glyphicon glyphicon-ok',
+                invalid: 'glyphicon glyphicon-remove',
+                validating: 'glyphicon glyphicon-refresh'
+            },
+            fields: {
+                userName: {
+                    validators: {
+                        notEmpty: {
+                            message: '请输入用户名'
+                        },
+                        stringLength: {
+                            min: 5,
+                            max: 20,
+                            message: '用户名必须是6~20个字符'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_\.]+$/,
+                            message: '用户名只能由英文或数字组成'
+                        },
+                    }
+                },
+                userPassword: {
+                    validators: {
+                        notEmpty: {
+                            message: '请输入密码'
+                        },
+                        stringLength: {
+                            min: 6,
+                            max: 20,
+                            message: '密码必须是6~20个字符'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_\.]+$/,
+                            message: '密码只能由英文或数字组成'
+                        },
+                        identical: {
+                            field: 'confirmPassword',
+                            message: '两次输入密码不一致'
+                        },
+                        different: {
+                            field: 'userName',
+                            message: '密码不能和用户名相同'
+                        }
+                    }
+                },
+                confirmPassword: {
+                    validators: {
+                        notEmpty: {
+                            message: '请再次输入密码'
+                        },
+                        identical: {
+                            field: 'userPassword',
+                            message: '两次输入密码不一致'
+                        },
+                        different: {
+                            field: 'userName',
+                            message: '密码不能和用户名相同'
+                        }
+                    }
+                },
+                userEmail: {
+                    validators: {
+                        notEmpty: {
+                            message: '请输入您的邮箱'
+                        },
+                        regexp: {
+                            regexp: /^[a-zA-Z0-9_\.]+@[a-zA-Z0-9_\.]+$/,
+                            message: '邮箱格式不正确'
+                        },
+                    }
+                }
+            }
+        });
+    });
+</script>
+
+</html>
